@@ -23,7 +23,7 @@
         </script>
         @yield('viewFunction');
         <script>
-            app.controller('viewCtrl', viewFunction);
+            app.controller('viewCtrl', viewFunction);   
         </script>
     </body>
 
