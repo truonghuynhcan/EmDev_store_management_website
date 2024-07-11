@@ -23,6 +23,9 @@ Route::get('/dang-ky', [UserController::class, 'register'])->name('register');
 Route::post('/dang-ky-loading', [UserController::class, 'register_'])->name('register_');
 
 Route::get('/tao-don-hang', [OrderController::class, 'create_order'])->name('create_order');
+Route::post('/tao-don-hang', [OrderController::class, 'checkout_'])->name('checkout_');
+Route::get('/vong-quay-may-man/{id_order}', [OrderController::class, 'luckyWheel'])->name('luckyWheel');
+Route::post('/update-lucky-result/{id_order}', [OrderController::class, 'updateLuckyResult']);
 Route::get('/trang-chu', function () {
     return view('page.home');
 })->name('home');
