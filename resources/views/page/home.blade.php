@@ -5,7 +5,7 @@
 @section('body')
     <section class="mt-3">
         <div class="container">
-            <a href="#" class="btn btn-primary">Thêm đơn hàng mới</a>
+            <a href="{{route('newOrder')}}" class="btn btn-primary">Thêm đơn hàng mới</a>
             <a href="#" class="btn btn-outline-primary">Menu</a>
         </div>
     </section>
