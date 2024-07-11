@@ -7,7 +7,7 @@
     <div class="d-flex align-items-center py-4 ">
 
         <main class="m-auto bg-body-tertiary p-3 rounded" style="width: 300px;">
-            <form action="" method="POST">
+            <form action="{{route('login_')}}" method="POST">
                 @csrf
                 <h1 class="mb-3 fw-bold text-center">Em<span class="text-primary">Dev</span></h1>
                 <h1 class="h3 mb-3 fw-normal">Đăng nhập</h1>
@@ -30,12 +30,12 @@
                 <div class="form-check text-start my-3">
                     <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
                     <label class="form-check-label" for="flexCheckDefault">
-                        Remember me
+                        Nhớ tài khoản
                     </label>
                 </div>
                 <a href="{{ route('register') }}">Đăng ký</a>
                 <br>
-                <button class="btn btn-primary w-100 py-2" type="submit">Sign in</button>
+                <button class="btn btn-primary w-100 py-2" type="submit">Đăng nhập</button>
             </form>
         </main>
     </div>

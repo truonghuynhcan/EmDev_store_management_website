@@ -31,8 +31,10 @@
                 </li>
             </ul>
             <div>
+                @auth
                 <img src="{{asset('images/btt.jpg')}}" width="40px" class="rounded-5" alt="">
                 <span>{{Auth::user()->name}}</span>
+                @endauth
             </div>
         </div>
     </div>

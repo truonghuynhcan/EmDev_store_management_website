@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name_user')->nullable();//khách hàng có thể điền tên hoặc mssv hoặc ko
             $table->string('total_money')->nullable();
             $table->string('quantity')->nullable();
-            $table->enum('status',['cart','paid']);
+            $table->enum('status',['cart','paid'])->default('cart');
             $table->enum('payment',['cash','bank_transfer'])->default('cash');
             $table->enum('lucky',['no','yes'])->default('no');
             $table->string('gift')->nullable();
