@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="vn" data-bs-theme="dark">
+<html lang="vn" data-bs-theme="">
 
     <head>
         <meta charset="UTF-8">
@@ -10,8 +10,16 @@
     </head>
 
     <body ng-app="myApp" ng-controller="mainCtrl">
-        @include('layout.header')
+        @auth
+            @include('layout.header')
+        @endauth
         @yield('body')
+        @auth
+            <footer class="bg-black text-white text-center p-3">
+                <p>© EmDev - Always Accompany And Support You</p>
+
+            </footer>
+        @endauth
 
         <!-- JS -->
         <script src="{{ asset('') }}js/bootstrap.min.js"></script>
@@ -23,7 +31,7 @@
         </script>
         @yield('viewFunction')
         <script>
-            app.controller('viewCtrl', viewFunction);   
+            app.controller('viewCtrl', viewFunction);
         </script>
     </body>
 

@@ -26,13 +26,6 @@
                     <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password">
                     <label for="floatingPassword">Password</label>
                 </div>
-
-                <div class="form-check text-start my-3">
-                    <input class="form-check-input" type="checkbox" value="remember-me" id="flexCheckDefault">
-                    <label class="form-check-label" for="flexCheckDefault">
-                        Nhớ tài khoản
-                    </label>
-                </div>
                 <a href="{{ route('register') }}">Đăng ký</a>
                 <br>
                 <button class="btn btn-primary w-100 py-2" type="submit">Đăng nhập</button>

@@ -161,7 +161,7 @@
                         <input type="submit" class="mt-3 btn btn-outline-primary" disabled value="Thanh toán online">
                     </form>
                 </div>
-                </á>
+            </aside>
         </div>
     </div>
     <script>

@@ -4,67 +4,136 @@
 @endsection
 @section('body')
     <section class="mt-3">
-        <div class="container">
+        <div class="container text-end">
             <a href="{{ route('create_order') }}" class="btn btn-primary">Thêm đơn hàng mới</a>
-            <a href="#" class="btn btn-outline-primary">Menu</a>
         </div>
     </section>
+    <div class="container">
+        <div class="row">
+            <section class="col">
+                <h1 class=" mt-3">Menu</h1>
+                <div class="mt-3">
+                    <div class="mt-3">
+                        <h3>Combo</h3>
+                        <hr width="200px" class="mt-1 border border-light border-3 rounded">
+                        @foreach ($combo as $item)
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-3">
+                                        <img src="{{ asset('') }}images/{{ $item->image }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="card-body">
+                                            <span class="d-none" id="card-id">{{ $item->id }}</span>
+                                            <h6 class="card-title">{{ $item->name }}</h6>
+                                            <p class="card-text text-end">
+                                                @if ($item->sale_price)
+                                                    <span class="h3 text-primary">{{ number_format($item->sale_price, 0, ',', '.') }} ₫</span>
+                                                    <del class="ms-2 fw-light">{{ number_format($item->price, 0, ',', '.') }} ₫</del>
+                                                @else
+                                                    <span class="h3 text-primary">{{ number_format($item->price, 0, ',', '.') }} ₫</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class=" mt-3">
+                        <h3>Food</h3>
+                        <hr width="200px" class="mt-1 border border-light border-3 rounded">
+                        @foreach ($food as $item)
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-3">
+                                        <img src="{{ asset('') }}images/{{ $item->image }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="card-body">
+                                            <span class="d-none" id="card-id">{{ $item->id }}</span>
+                                            <h6 class="card-title">{{ $item->name }}</h6>
+                                            <p class="card-text text-end">
+                                                @if ($item->sale_price)
+                                                    <span class="h3 text-primary">{{ number_format($item->sale_price, 0, ',', '.') }} ₫</span>
+                                                    <del class="ms-2 fw-light">{{ number_format($item->price, 0, ',', '.') }} ₫</del>
+                                                @else
+                                                    <span class="h3 text-primary">{{ number_format($item->price, 0, ',', '.') }} ₫</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class=" mt-3">
+                        <h3>Nước</h3>
+                        <hr width="200px" class="mt-1 border border-light border-3 rounded">
+                        @foreach ($drink as $item)
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-3">
+                                        <img src="{{ asset('') }}images/{{ $item->image }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-9">
+                                        <div class="card-body">
+                                            <span class="d-none" id="card-id">{{ $item->id }}</span>
+                                            <h6 class="card-title">{{ $item->name }}</h6>
+                                            <p class="card-text text-end">
+                                                @if ($item->sale_price)
+                                                    <span class="h3 text-primary">{{ number_format($item->sale_price, 0, ',', '.') }} ₫</span>
+                                                    <del class="ms-2 fw-light">{{ number_format($item->price, 0, ',', '.') }} ₫</del>
+                                                @else
+                                                    <span class="h3 text-primary">{{ number_format($item->price, 0, ',', '.') }} ₫</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </section>
+         
+        </div>
+    </div>
     <section class="mt-3 bg-body-tertiary">
-        <div class="container">
+        <div class="container py-3">
             <h2>
                 Đơn hàng trong ngày
             </h2>
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Khách hàng</th>
-                        <th scope="col">Tổng đơn</th>
-                        <th scope="col">Thanh toán</th>
-                        <th scope="col">Gift</th>
-                    </tr>
-                </thead>
-                <tbody class="table-group-divider">
-                    @foreach ($orders as $item)
+            @if ($orders->isEmpty())
+                <div class="alert alert-primary" role="alert">
+                    Hãy bắt đầu với những đơn hàng đầu tiên
+                </div>
+            @else
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <th scope="row">{{$item->id}}</th>
-                            <td>{{$item->name_user?$item->name_user:'Ẩn danh'}}</td>
-                            <td>{{$item->total_money}}</td>
-                            <td>{{$item->payment}}</td>
-                            <td>
-                                <span class="badge bg-primary">{{$item->gift?$item->gift:$item->lucky}}</span>
-                            </td>
+                            <th scope="col">#</th>
+                            <th scope="col">Khách hàng</th>
+                            <th scope="col">Tổng đơn</th>
+                            <th scope="col">Thanh toán</th>
+                            <th scope="col">Gift</th>
                         </tr>
-                    @endforeach
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td>
-                            <span class="badge bg-primary">Gấu bông</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jacob</td>
-                        <td>Thornton</td>
-                        <td>Thornton</td>
-                        <td>
-                            <span class="badge bg-info">Móc khóa</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td colspan="2">Larry the Bird</td>
-                        <td>@twitter</td>
-                        <td>
-                            <span class="badge bg-success">Sticker</span>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody class="table-group-divider">
+                        @foreach ($orders as $item)
+                            <tr>
+                                <th scope="row">{{ $item->id }}</th>
+                                <td>{{ $item->name_user ? $item->name_user : 'Ẩn danh' }}</td>
+                                <td>{{ $item->total_money }}</td>
+                                <td>{{ $item->payment }}</td>
+                                <td>
+                                    <span class="badge bg-{{ $item->gift == 'Gấu bông' ? 'primary' : ($item->gift == 'Móc khóa' ? 'info' : ($item->gift == 'Sticker' ? 'success' : 'secondary')) }}">{{ $item->gift ? $item->gift : $item->lucky }}</span>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            @endif
         </div>
-
     </section>
 @endsection

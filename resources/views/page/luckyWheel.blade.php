@@ -75,10 +75,22 @@
             </div>
         </div>
         <div class="inputArea" onchange="createWheel()" style="display: none;">
-            <textarea rows="20" cols="30">May mắn lần sau,50%
-Stiker,39%
-Móc Khóa,10%
-Gấu bông,1%
+            <textarea rows="20" cols="30">May mắn lần sau
+Móc khóa
+Stiker
+May mắn lần sau
+Móc khóa
+Stiker
+May mắn lần sau
+Móc khóa
+Stiker  
+May mắn lần sau
+Móc khóa
+Stiker
+May mắn lần sau
+Móc khóa
+Stiker  
+Gấu bông
         </textarea>
         </div>
         <!-- Button trigger modal -->
@@ -110,10 +122,10 @@ Gấu bông,1%
         </div>
         <script>
             let items = [];
+            let probabilities = [];
+            let itemDegs = {};
             let currentDeg = 0;
             let step = 360 / items.length;
-            let colors = [];
-            let itemDegs = {};
 
             function randomColor() {
                 const r = Math.floor(Math.random() * 255);
@@ -141,6 +153,7 @@ Gấu bông,1%
             function getPercent(input, min, max) {
                 return (((input - min) * 100) / (max - min)) / 100;
             }
+
 
             function parseInput(input) {
                 const lines = input.split("\n");

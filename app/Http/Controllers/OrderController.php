@@ -54,6 +54,10 @@ class OrderController extends Controller
             $orderDetails->price = $item['price'];
             $orderDetails->quantity = $item['quantity'];
             $orderDetails->save();
+
+            $p=Product::find($item['id_product']);
+            $p->sold+=$item['quantity'];
+            $p->save();
         }
 
         if ($request->input('total_amount')>20000) {
