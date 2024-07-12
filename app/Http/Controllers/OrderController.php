@@ -14,31 +14,30 @@ class OrderController extends Controller
     public function luckyWheel($id_order){
         return view('page.luckyWheel', compact('id_order'));
     }
-    public function updateLuckyResult(Request $request, $id_order)
+    public function updateLuckyResult(Request $request)
     {
-        // Kiểm tra và xác thực yêu cầu
-        $request->validate([
-            'winner' => 'required|string|max:255',
-        ]);
-
+        $id_order = $request->input('order_id');
+        $gift = $request->input('gift');
         // Lấy thông tin đơn hàng
         $order = Order::find($id_order);
-        if (!$order) {
-            return response()->json(['success' => false, 'message' => 'Order not found'], 404);
-        }
-
         // Lưu kết quả quay số may mắn vào đơn hàng
-        $order->gift = $request->winner;
+        $order->gift = $gift;
         $order->save();
 
-        return response()->json(['success' => true]);
+        return redirect()->route('home');
     }
     public function checkout_(Request $request)
     {
         $order = Order::find($request->input('id_order'));
         $order->total_money = $request->input('total_amount');
         $order->quantity = $request->input('total_quantity');
+        if ($request->input('name_user')) {
+            $order->name_user = $request->input('name_user');
+        }
         $order->status = 'paid';
+        if ($request->input('total_amount')>=24000) {
+            $order->lucky = 'yes';
+        }
         $order->save();
         // Lấy dữ liệu từ trường order_details
         $orderDetails = json_decode($request->input('order_details'), true);
@@ -82,8 +81,10 @@ class OrderController extends Controller
 
         $food = Product::where('id_category', '=', 1)->get();
         $drink = Product::where('id_category', '=', 2)->get();
+        $combo = Product::where('id_category', '=', 3)->get();
 
-        return view('page.cart', compact('order', 'food', 'drink'));
+
+        return view('page.cart', compact('order', 'food', 'drink', 'combo'));
     }
     /**
      * Display a listing of the resource.

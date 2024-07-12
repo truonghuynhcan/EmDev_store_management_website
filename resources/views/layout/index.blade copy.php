@@ -21,7 +21,7 @@
             app.controller('mainCtrl', function($scope, $http) {});
             var viewFunction = function($scope) {};
         </script>
-        @yield('viewFunction')
+        @yield('viewFunction');
         <script>
             app.controller('viewCtrl', viewFunction);   
         </script>

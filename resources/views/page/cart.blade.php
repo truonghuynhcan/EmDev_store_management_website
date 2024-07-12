@@ -8,30 +8,42 @@
             <section class="col-md-7">
                 <h1 class=" mt-3">Giỏ hàng #{{ $order->name_user ? $order->name_user : $order->id }}</h1>
                 <div class="mt-3">
-                    <div class="d-none">
+                    <div class="mt-3">
                         <h3>Combo</h3>
                         <hr width="200px" class="mt-1 border border-light border-3 rounded">
-                        <div class="card mb-3">
-                            <div class="row g-0">
-                                <div class="col-3">
-                                    <img src="../images/btt.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
-                                <div class="col-7">
-                                    <div class="card-body">
-                                            <span class="d-none" id="card-id">1</span>
-                                        <h6 class="card-title">Combo 1 - Bánh tráng trộn, trà chanh, bánh tráng cuộn</h6>
-                                        <p class="card-text">
-                                            <span class="h3 text-primary">40.000 ₫</span>
-                                            <del class="ms-2 fw-light">50.000 ₫</del>
-                                        </p>
+                        @foreach ($combo as $item)
+                            <div class="card mb-3">
+                                <div class="row g-0">
+                                    <div class="col-3">
+                                        <img src="{{ asset('') }}images/{{ $item->image }}" class="img-fluid rounded-start" alt="...">
+                                    </div>
+                                    <div class="col-7">
+                                        <div class="card-body">
+                                            <span class="d-none" id="card-id">{{ $item->id }}</span>
+                                            <h6 class="card-title">{{ $item->name }}</h6>
+                                            <p class="card-text">
+                                                @if ($item->sale_price)
+                                                    <span class="h3 text-primary">{{ number_format($item->sale_price, 0, ',', '.') }} ₫</span>
+                                                    <del class="ms-2 fw-light">{{ number_format($item->price, 0, ',', '.') }} ₫</del>
+                                                @else
+                                                    <span class="h3 text-primary">{{ number_format($item->price, 0, ',', '.') }} ₫</span>
+                                                @endif
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center pe-2">
+                                        <div class="input-group">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', -1)">-</button>
+                                            <input type="number" class="form-control text-center" value="0" id="quantity_{{ $item->id }}" onchange="updateQuantity('{{ $item->id }}', 0)">
+                                            <button class="btn btn-outline-secondary" type="button" onclick="updateQuantity('{{ $item->id }}', 1)">+</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-2 d-flex align-items-center pe-2 d-none">
+                                        <input class="form-control" type="number" value="0" name="" id="">
                                     </div>
                                 </div>
-
-                                <div class="col-2 d-flex align-items-center pe-2">
-                                    <input class="form-control" type="number" value="0" name="" id="">
-                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
                     <div class=" mt-3">
                         <h3>Food</h3>
@@ -40,7 +52,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-3">
-                                        <img src="../images/btt.jpg" class="img-fluid rounded-start" alt="...">
+                                        <img src="{{ asset('') }}images/{{ $item->image }}" class="img-fluid rounded-start" alt="...">
                                     </div>
                                     <div class="col-7">
                                         <div class="card-body">
@@ -77,7 +89,7 @@
                             <div class="card mb-3">
                                 <div class="row g-0">
                                     <div class="col-3">
-                                        <img src="../images/btt.jpg" class="img-fluid rounded-start" alt="...">
+                                        <img src="{{ asset('') }}images/{{ $item->image }}" class="img-fluid rounded-start" alt="...">
                                     </div>
                                     <div class="col-7">
                                         <div class="card-body">
@@ -140,8 +152,11 @@
                             <div>Tổng tiền</div>
                             <div class="text-primary h4" id="total_amount"></div>
                         </div>
+                        <div class="d-flex justify-content-between">
+                            <input type="text" name="name_user" placeholder="Tên khách hàng" class="form-control">
+                            <div class="text-primary h4" id="total_amount"></div>
+                        </div>
                         <hr class="border-4">
-                        <button type="button" class="mt-3 btn btn-primary" value="Quay nhận thưởng">
                         <input type="submit" class="mt-3 btn btn-primary" value="Thanh toán tiền mặt">
                         <input type="submit" class="mt-3 btn btn-outline-primary" disabled value="Thanh toán online">
                     </form>

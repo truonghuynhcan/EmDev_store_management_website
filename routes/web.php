@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,10 +26,8 @@ Route::post('/dang-ky-loading', [UserController::class, 'register_'])->name('reg
 Route::get('/tao-don-hang', [OrderController::class, 'create_order'])->name('create_order');
 Route::post('/tao-don-hang', [OrderController::class, 'checkout_'])->name('checkout_');
 Route::get('/vong-quay-may-man/{id_order}', [OrderController::class, 'luckyWheel'])->name('luckyWheel');
-Route::post('/update-lucky-result/{id_order}', [OrderController::class, 'updateLuckyResult']);
-Route::get('/trang-chu', function () {
-    return view('page.home');
-})->name('home');
+Route::post('/update-lucky-result', [OrderController::class, 'updateLuckyResult'])->name('updateLuckyResult');
+Route::get('/trang-chu', [PageController::class, 'home'] )->name('home');
 
 
 Route::prefix('api')->group(function(){

@@ -5,90 +5,8 @@
 @section('body')
     <section class="mt-3">
         <div class="container">
-            <a href="{{route('create_order')}}" class="btn btn-primary">Thêm đơn hàng mới</a>
+            <a href="{{ route('create_order') }}" class="btn btn-primary">Thêm đơn hàng mới</a>
             <a href="#" class="btn btn-outline-primary">Menu</a>
-        </div>
-    </section>
-    <section class="mt-3">
-        <div class="container">
-            <h3>Combo</h3>
-            <hr width="200px" class="mt-1 border border-light border-3 rounded">
-            <div class="row">
-                <div class="col-6">
-                    <div class="card">
-                        <img src="../images/btt.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Combo 1 - Bánh tráng trộn, trà chanh, bánh tráng cuộn</h5>
-                            <p class="card-text text-end"><del class="fw-light">50.000 ₫</del><span class="ms-2 h3 text-primary">40.000 ₫</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-6">
-                    <div class="card">
-                        <img src="../images/btt.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Combo 1 - Bánh tráng trộn, trà chanh, bánh tráng cuộn</h5>
-                            <p class="card-text text-end"><del class="fw-light">50.000 ₫</del><span class="ms-2 h3 text-primary">40.000 ₫</span></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container mt-3">
-            <h3>Bánh tráng</h3>
-            <hr width="200px" class="mt-1 border border-light border-3 rounded">
-
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="../images/btt.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Bánh tráng phơi sương sương</h5>
-                            <p class="card-text text-end">
-                                <del class="fw-light">50.000 ₫</del>
-                                <br>
-                                <span class="ms-2 h3 text-primary">40.000 ₫</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="../images/btt.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Bánh tráng phơi sương sương</h5>
-                            <p class="card-text text-end">
-                                <del class="fw-light">50.000 ₫</del>
-                                <br>
-                                <span class="ms-2 h3 text-primary">40.000 ₫</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="card mb-3">
-                <div class="row g-0">
-                    <div class="col-4">
-                        <img src="../images/btt.jpg" class="img-fluid rounded-start" alt="...">
-                    </div>
-                    <div class="col-8">
-                        <div class="card-body">
-                            <h5 class="card-title">Bánh tráng phơi sương sương</h5>
-                            <p class="card-text text-end">
-                                <del class="fw-light">50.000 ₫</del>
-                                <br>
-                                <span class="ms-2 h3 text-primary">40.000 ₫</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
     <section class="mt-3 bg-body-tertiary">
@@ -107,13 +25,17 @@
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    <tr>
-                        <th scope="row">0</th>
-                        <td>Mark</td>
-                        <td>Otto</td>
-                        <td>@mdo</td>
-                        <td></td>
-                    </tr>
+                    @foreach ($orders as $item)
+                        <tr>
+                            <th scope="row">{{$item->id}}</th>
+                            <td>{{$item->name_user?$item->name_user:'Ẩn danh'}}</td>
+                            <td>{{$item->total_money}}</td>
+                            <td>{{$item->payment}}</td>
+                            <td>
+                                <span class="badge bg-primary">{{$item->gift?$item->gift:$item->lucky}}</span>
+                            </td>
+                        </tr>
+                    @endforeach
                     <tr>
                         <th scope="row">1</th>
                         <td>Mark</td>
