@@ -10,7 +10,7 @@
                 <div class="card text-white bg-primary">
                     <div class="card-body">
                         <h5 class="card-title">Tổng Doanh Thu</h5>
-                        <p class="card-text">1.450.000 ₫</p>
+                        <p class="card-text">{{ number_format($totalRevenue,0,',','.')}} ₫</p>
                     </div>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <div class="card text-white bg-success">
                     <div class="card-body">
                         <h5 class="card-title">Tổng Lợi Nhuận</h5>
-                        <p class="card-text">673.850 ₫</p>
+                        <p class="card-text">0 ₫</p>
                     </div>
                 </div>
             </div>
@@ -27,7 +27,7 @@
             <div class="col-md-3">
                 <div class="card text-white bg-info">
                     <div class="card-body">
-                        <h5 class="card-title">Tổng Sản Phẩm Đang Bán</h5>
+                        <h5 class="card-title">Tổng Sản Phẩm đã Bán</h5>
                         <p class="card-text">5</p>
                     </div>
                 </div>

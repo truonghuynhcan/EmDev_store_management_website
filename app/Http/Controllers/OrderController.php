@@ -11,6 +11,23 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    public function delHomeOrder($id_order)
+    {
+        // Tìm đơn hàng
+        $order = Order::findOrFail($id_order);
+
+        // Lặp qua các chi tiết đơn hàng để giảm số lượng tồn kho
+        foreach ($order->details as $detail) {
+            $product = $detail->product;
+            if ($product) {
+                $product->sold -= $detail->quantity;
+                $product->save();
+            }
+        }
+        $order->delete();
+
+        return redirect()->route('home')->with('success', 'Order deleted successfully.');
+    }
     public function luckyWheel($id_order){
         return view('page.luckyWheel', compact('id_order'));
     }

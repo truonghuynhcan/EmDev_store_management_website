@@ -19,7 +19,7 @@ Route::post('/tao-don-hang', [OrderController::class, 'checkout_'])->name('check
 Route::get('/vong-quay-may-man/{id_order}', [OrderController::class, 'luckyWheel'])->name('luckyWheel');
 Route::post('/update-lucky-result', [OrderController::class, 'updateLuckyResult'])->name('updateLuckyResult');
 Route::get('/trang-chu', [PageController::class, 'home'] )->name('home');
-Route::get('/trang-chu-xoa-don-hang/{id_order}', [PageController::class, 'delHomeOrder'] )->name('delHomeOrder');
+Route::get('/trang-chu-xoa-don-hang/{id_order}', [OrderController::class, 'delHomeOrder'] )->name('delHomeOrder');
 
 Route::get('/thong-ke', [AnalyticsController ::class, 'dashboard'] )->name('dashboard');
 
