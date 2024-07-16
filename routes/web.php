@@ -7,17 +7,6 @@ use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
 Route::get('/',function(){return redirect()->route('login');});
 Route::get('/dang-nhap', [UserController::class, 'login'])->name('login');
 Route::post('/dang-nhap-loading', [UserController::class, 'login_'])->name('login_');
@@ -30,6 +19,7 @@ Route::post('/tao-don-hang', [OrderController::class, 'checkout_'])->name('check
 Route::get('/vong-quay-may-man/{id_order}', [OrderController::class, 'luckyWheel'])->name('luckyWheel');
 Route::post('/update-lucky-result', [OrderController::class, 'updateLuckyResult'])->name('updateLuckyResult');
 Route::get('/trang-chu', [PageController::class, 'home'] )->name('home');
+Route::get('/trang-chu-xoa-don-hang/{id_order}', [PageController::class, 'delHomeOrder'] )->name('delHomeOrder');
 
 Route::get('/thong-ke', [AnalyticsController ::class, 'dashboard'] )->name('dashboard');
 

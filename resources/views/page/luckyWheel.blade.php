@@ -74,6 +74,9 @@
                 <div class="triangle"></div>
             </div>
         </div>
+        <div class=" container text-end">
+            <a href="{{route('home')}}">Bỏ qua lượt quay</a>
+        </div>
         <div class="inputArea" onchange="createWheel()" style="display: none;">
             <textarea rows="20" cols="30">May mắn lần sau
 Móc khóa

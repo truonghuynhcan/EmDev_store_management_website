@@ -115,8 +115,8 @@
                             <th scope="col">#</th>
                             <th scope="col">Khách hàng</th>
                             <th scope="col">Tổng đơn</th>
-                            <th scope="col">Thanh toán</th>
                             <th scope="col">Gift</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -124,10 +124,12 @@
                             <tr>
                                 <th scope="row">{{ $item->id }}</th>
                                 <td>{{ $item->name_user ? $item->name_user : 'Ẩn danh' }}</td>
-                                <td>{{ $item->total_money }}</td>
-                                <td>{{ $item->payment }}</td>
+                                <td>{{ number_format($item->total_money,0,',','.')}} ₫</td>
                                 <td>
                                     <span class="badge bg-{{ $item->gift == 'Gấu bông' ? 'primary' : ($item->gift == 'Móc khóa' ? 'info' : ($item->gift == 'Sticker' ? 'success' : 'secondary')) }}">{{ $item->gift ? $item->gift : $item->lucky }}</span>
+                                </td>
+                                <td>
+                                    <a href="{{route('delHomeOrder',$item->id)}}" class="btn btn-outline-danger">Xóa</a>
                                 </td>
                             </tr>
                         @endforeach
