@@ -27,8 +27,8 @@
             <div class="col-md-3">
                 <div class="card text-white bg-info">
                     <div class="card-body">
-                        <h5 class="card-title">Tổng Sản Phẩm đã Bán</h5>
-                        <p class="card-text">5</p>
+                        <h5 class="card-title">Số Lượng Sản Phẩm Bán Ra</h5>
+                        <p class="card-text">{{ $totalSoldProducts}}</p>
                     </div>
                 </div>
             </div>
@@ -37,7 +37,7 @@
                 <div class="card text-white bg-warning">
                     <div class="card-body">
                         <h5 class="card-title">Tổng Khách Hàng</h5>
-                        <p class="card-text">68</p>
+                        <p class="card-text">{{ $totalUser}}</p>
                     </div>
                 </div>
             </div>
@@ -47,7 +47,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Earnings Overview</h5>
+                        <h5 class="card-title">Doanh Thu Theo Ngày</h5>
                         <div id="earnings_chart" class="chart-container"></div>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Bar Chart</h5>
+                        <h5 class="card-title">Số Lượng Bán Theo Sản Phẩm</h5>
                         <div id="bar_chart" class="chart-container"></div>
                     </div>
                 </div>
@@ -98,19 +98,10 @@
 
         function drawEarningsOverview() {
             var data = google.visualization.arrayToDataTable([
-                ['Month', 'Earnings'],
-                ['Jan', 10000],
-                ['Feb', 20000],
-                ['Mar', 15000],
-                ['Apr', 30000],
-                ['May', 25000],
-                ['Jun', 20000],
-                ['Jul', 30000],
-                ['Aug', 35000],
-                ['Sep', 30000],
-                ['Oct', 40000],
-                ['Nov', 35000],
-                ['Dec', 45000]
+                ['Ngày', 'Doanh Thu'],
+                @foreach($revenueByDay as $revenue)
+                    ['{{ $revenue->date }}', {{ $revenue->total_revenue }}],
+                @endforeach
             ]);
 
             var options = {
@@ -126,10 +117,7 @@
 
         function drawRevenueSources() {
             var data = google.visualization.arrayToDataTable([
-                ['Source', 'Percentage'],
-                ['Direct', 55],
-                ['Social', 30],
-                ['Referral', 15]
+                ['Tên Sản Phẩm', 'Số lượng'],
             ]);
 
             var options = {
@@ -145,13 +133,10 @@
 
         function drawBarChart() {
             var data = google.visualization.arrayToDataTable([
-                ['Month', 'Earnings'],
-                ['January', 3000],
-                ['February', 4000],
-                ['March', 5000],
-                ['April', 6000],
-                ['May', 7000],
-                ['June', 8000]
+                ['Tên sản phẩm', 'Số lượng'],
+                @foreach($countSoldProducts as $productsold)
+                    [decodeURIComponent('{{ json_encode($productsold->product->name) }}'), {{ $productsold->total_sold }}],
+                @endforeach
             ]);
 
             var options = {
@@ -159,7 +144,7 @@
                     width: '50%'
                 },
                 hAxis: {
-                    title: 'Total Earnings',
+                    title: 'Số Lượng Bán Ra Theo Sản Phẩm',
                 }
             };
 
