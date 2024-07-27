@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\OrderDetail;
+use App\Models\StockEntry;
 use Illuminate\Http\Request;
 
 class AnalyticsController extends Controller
@@ -19,6 +20,10 @@ class AnalyticsController extends Controller
         
         $totalSoldProducts = OrderDetail::sum('quantity');
 
+        $spent = StockEntry::sum('price');
+        $totalProfit = $totalRevenue - $spent;
+
+
         $totalUser = Order::count('id');
 
         $revenueByDay = Order::select(Order::raw('DATE(created_at) as date'), Order::raw('SUM(total_money) as total_revenue'))
@@ -30,8 +35,13 @@ class AnalyticsController extends Controller
                                 $item->date = \Carbon\Carbon::parse($item->date)->format('d/m/Y');
                                 return $item;
                             });
-        // dd($countSoldProducts);
-        return view('analytics.dashboard', compact('totalRevenue', 'countSoldProducts','totalSoldProducts','totalUser','revenueByDay'));
+        $countSoldProductsByUser = Order::select('id_admin')
+                            ->selectRaw('COUNT(*) as total_orders')
+                            ->with('user') // Giả sử có một quan hệ user liên kết với bảng users
+                            ->groupBy('id_admin')
+                            ->orderByDesc('total_orders')
+                            ->get();
+        return view('analytics.dashboard', compact('totalRevenue', 'countSoldProducts','totalSoldProducts','totalProfit','totalUser','revenueByDay','countSoldProductsByUser'));
     }
 }
 

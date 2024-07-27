@@ -19,7 +19,7 @@
                 <div class="card text-white bg-success">
                     <div class="card-body">
                         <h5 class="card-title">Tổng Lợi Nhuận</h5>
-                        <p class="card-text">0 ₫</p>
+                        <p class="card-text">{{ number_format($totalProfit,0,',','.')}} ₫</p>
                     </div>
                 </div>
             </div>
@@ -56,7 +56,7 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Revenue Sources</h5>
+                        <h5 class="card-title">Tỷ lệ phần trăm bán ra theo thành viên </h5>
                         <div id="revenue_chart" class="chart-container"></div>
                     </div>
                 </div>
@@ -118,6 +118,9 @@
         function drawRevenueSources() {
             var data = google.visualization.arrayToDataTable([
                 ['Tên Sản Phẩm', 'Số lượng'],
+                @foreach($countSoldProductsByUser as $user)
+                    ['{{ $user->user->name }}', {{ $user->total_orders }}],
+                @endforeach
             ]);
 
             var options = {
@@ -135,7 +138,7 @@
             var data = google.visualization.arrayToDataTable([
                 ['Tên sản phẩm', 'Số lượng'],
                 @foreach($countSoldProducts as $productsold)
-                    [decodeURIComponent('{{ json_encode($productsold->product->name) }}'), {{ $productsold->total_sold }}],
+                    [@json($productsold->product->name), {{ $productsold->total_sold }}],
                 @endforeach
             ]);
 

@@ -13,4 +13,8 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class, 'id_order');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_admin'); // 'user_id' is the foreign key in the orders table
+    }
 }
