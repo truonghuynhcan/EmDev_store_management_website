@@ -22,6 +22,8 @@ Route::get('/trang-chu', [PageController::class, 'home'] )->name('home');
 Route::get('/trang-chu-xoa-don-hang/{id_order}', [OrderController::class, 'delHomeOrder'] )->name('delHomeOrder');
 
 Route::get('/thong-ke', [AnalyticsController ::class, 'dashboard'] )->name('dashboard');
+Route::get('/don-hang', [OrderController ::class, 'index'] )->name('order');
+Route::get('/don-hang-chi-tiet/{id}', [OrderController ::class, 'detail'] )->name('orderDetail');
 
 
 Route::prefix('api')->group(function(){

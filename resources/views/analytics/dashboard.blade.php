@@ -64,11 +64,19 @@
         </div>
         <!-- Bar Chart -->
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Số Lượng Bán Theo Sản Phẩm</h5>
                         <div id="bar_chart" class="chart-container"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Giới tính khách hàng</h5>
+                        <div id="gender_chart" class="chart-container"></div>
                     </div>
                 </div>
             </div>
@@ -94,6 +102,7 @@
             drawEarningsOverview();
             drawRevenueSources();
             drawBarChart();
+            drawGenderSources();
         }
 
         function drawEarningsOverview() {
@@ -117,7 +126,7 @@
 
         function drawRevenueSources() {
             var data = google.visualization.arrayToDataTable([
-                ['Tên Sản Phẩm', 'Số lượng'],
+                ['Tên Thành viên', 'Số lượng'],
                 @foreach($countSoldProductsByUser as $user)
                     ['{{ $user->user->name }}', {{ $user->total_orders }}],
                 @endforeach
@@ -131,6 +140,25 @@
             };
 
             var chart = new google.visualization.PieChart(document.getElementById('revenue_chart'));
+            chart.draw(data, options);
+        }
+
+        function drawGenderSources() {
+            var data = google.visualization.arrayToDataTable([
+                ['Giới tính', 'Số lượng'],
+                @foreach($countGender as $gender)
+                    ['{{ $gender->gender == 0 ? 'Nam' : 'Nữ' }}', {{ $gender->total_gender }}],
+                @endforeach
+            ]);
+
+            var options = {
+                pieHole: 0.4,
+                legend: {
+                    position: 'bottom'
+                }
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('gender_chart'));
             chart.draw(data, options);
         }
 

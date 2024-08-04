@@ -23,7 +23,7 @@
                         <li><a class="dropdown-item" href="#">Nhân viên</a></li>
                         <li><a class="dropdown-item" href="#">Nhập kho</a></li>
                         <li><a class="dropdown-item" href="#">Sản phẩm</a></li>
-                        <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                        <li><a class="dropdown-item" href="{{route('order')}}">Đơn hàng</a></li>
                     </ul>
                 </li>
                 <li class="nav-item">

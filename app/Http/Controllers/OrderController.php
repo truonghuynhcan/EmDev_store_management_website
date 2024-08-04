@@ -11,6 +11,20 @@ use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
+    public function index()
+    {
+        // Tìm đơn hàng
+        $orders = Order::select('id','id_admin','gender','total_money','quantity','payment')->get();
+        // dd($orders);
+        return view('page.order', compact('orders'));
+    }
+    public function detail($id)
+    {
+        // Tìm đơn hàng
+        $orderDetail = OrderDetail::where('id_order', $id)->get();
+        $order = Order::findOrFail($id);
+        return view('page.orderDetail', compact('order','orderDetail'));
+    }
     public function delHomeOrder($id_order)
     {
         // Tìm đơn hàng
@@ -110,10 +124,6 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-    }
 
     /**
      * Show the form for creating a new resource.

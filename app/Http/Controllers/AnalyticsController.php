@@ -37,11 +37,16 @@ class AnalyticsController extends Controller
                             });
         $countSoldProductsByUser = Order::select('id_admin')
                             ->selectRaw('COUNT(*) as total_orders')
-                            ->with('user') // Giả sử có một quan hệ user liên kết với bảng users
+                            ->with('user') 
                             ->groupBy('id_admin')
                             ->orderByDesc('total_orders')
                             ->get();
-        return view('analytics.dashboard', compact('totalRevenue', 'countSoldProducts','totalSoldProducts','totalProfit','totalUser','revenueByDay','countSoldProductsByUser'));
+        $countGender = Order::select('gender')
+                        ->selectRaw('COUNT(*) as total_gender')
+                        ->groupBy('gender')
+                        ->get();
+        // dd($countGender);
+        return view('analytics.dashboard', compact('totalRevenue', 'countSoldProducts','totalSoldProducts','totalProfit','totalUser','revenueByDay','countSoldProductsByUser','countGender'));
     }
 }
 
