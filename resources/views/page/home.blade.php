@@ -99,7 +99,7 @@
          
         </div>
     </div>
-    <section class="mt-3 bg-body-tertiary">
+    <!-- <section class="mt-3 bg-body-tertiary">
         <div class="container py-3">
             <h2>
                 Đơn hàng trong ngày
@@ -116,7 +116,7 @@
                             <th scope="col">Khách hàng</th>
                             <th scope="col">Tổng đơn</th>
                             <th scope="col">Gift</th>
-                            <!-- <th scope="col"></th> -->
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody class="table-group-divider">
@@ -128,14 +128,14 @@
                                 <td>
                                     <span class="badge bg-{{ $item->gift == 'Gấu bông' ? 'primary' : ($item->gift == 'Móc khóa' ? 'info' : ($item->gift == 'Sticker' ? 'success' : 'secondary')) }}">{{ $item->gift ? $item->gift : $item->lucky }}</span>
                                 </td>
-                                <!-- <td>
+                                <td>
                                     <a href="{{route('delHomeOrder',$item->id)}}" class="btn btn-outline-danger">Xóa</a>
-                                </td> -->
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
                 </table>
             @endif
         </div>
-    </section>
+    </section> -->
 @endsection

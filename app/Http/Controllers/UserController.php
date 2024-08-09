@@ -8,10 +8,11 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
-    // public function login(){
-
-    //     return view('page.login');
-    // }
+    public function index()
+    {
+        $users = User::select('id','name','email')->get();
+        return view('page.user', compact('users'));
+    }
     function login(){
         return view('page.login');
     }

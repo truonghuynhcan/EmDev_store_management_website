@@ -13,4 +13,8 @@ class StockEntry extends Model
     {
         return $this->hasMany(StockItem::class, 'id_stock_entry');
     }
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'id_user');
+    }
 }

@@ -8,23 +8,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Trang chủ</a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Thống kê
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Đơn hàng trong ngày</a></li>
-                        <li>
-                            <hr class="dropdown-divider">
-                        </li>
-                        <li><a class="dropdown-item" href="{{route('dashboard')}}">Tất cả</a></li>
-                        <li><a class="dropdown-item" href="#">Nhân viên</a></li>
-                        <li><a class="dropdown-item" href="#">Nhập kho</a></li>
-                        <li><a class="dropdown-item" href="#">Sản phẩm</a></li>
-                        <li><a class="dropdown-item" href="{{route('order')}}">Đơn hàng</a></li>
-                    </ul>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('dashboard')}}">Thống kê</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('user')}}">Nhân viên</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('stock')}}">Nhập kho</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('order')}}">Đơn hàng</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('logout')}}">Đăng xuất</a>

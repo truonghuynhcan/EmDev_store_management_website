@@ -15,6 +15,6 @@ class Order extends Model
     }
     public function user()
     {
-        return $this->belongsTo(User::class, 'id_admin'); // 'user_id' is the foreign key in the orders table
+        return $this->belongsTo(User::class, 'id_admin'); 
     }
 }

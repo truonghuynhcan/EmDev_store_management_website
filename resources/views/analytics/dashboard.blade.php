@@ -4,7 +4,7 @@
 @endsection
 @section('body')
     <div class="container-fluid">
-        <div class="row">
+        <div class="row py-3">
             <!-- Total Revenue -->
             <div class="col-md-3">
                 <div class="card text-white bg-primary">

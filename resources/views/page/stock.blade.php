@@ -1,42 +1,40 @@
 @extends('layout.index')
 @section('title')
-Đơn hàng
+Nhập kho
 @endsection
 @section('body')
 <div class="container" style="min-height: 90vh;">
     <div class="row py-3">
         <div class="col-md-12">
             <h2>
-                Đơn hàng
+                Nhập kho
             </h2>
-            @if (!$orders)
+            @if (!$stocks)
             <div class="alert alert-primary" role="alert">
-                Chưa có đơn hàng nào
+                Chưa nhập hàng
             </div>
             @else
             <table class="table table-hover">
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Thành viên bán ra</th>
-                        <th scope="col">Giới tính khách hàng</th>
+                        <th scope="col">Thành viên nhập hàng</th>
+                        <th scope="col">Lần nhập hàng</th>
                         <th scope="col">Tổng tiền</th>
-                        <th scope="col">Số lượng sản phẩm</th>
-                        <th scope="col">Phương thức thanh toán</th>
+                        <th scope="col">Ghi chú</th>
                         <th scope="col">Thao tác</th>
                     </tr>
                 </thead>
                 <tbody class="table-group-divider">
-                    @foreach ($orders as $item)
+                    @foreach ($stocks as $item)
                     <tr>
                         <th scope="row">{{ $item->id }}</th>
                         <td>{{ $item->user->name}}</td>
-                        <td>{{$item->gender == 0 ? 'Nam' : 'Nữ'}}</td>
-                        <td>{{ number_format($item->total_money,0,',','.')}} ₫</td>
-                        <td>{{ $item->quantity}}</td>
-                        <td>{{$item->payment == 'cash' ? 'Tiền mặt' : 'Chuyển khoản'}}</td>
+                        <td>{{ $item->name}}</td>
+                        <td>{{ number_format($item->price,0,',','.')}} ₫</td>
+                        <td>{{$item->note == null ? 'Không' : $item->note}}</td>
                         <td>
-                            <a href="{{route('orderDetail',$item->id)}}" class="btn btn-outline-primary">Xem chi tiết</a>
+                            <a href="{{route('stockDetail',$item->id)}}" class="btn btn-outline-primary">Xem chi tiết</a>
                         </td>
                     </tr>
                     @endforeach
