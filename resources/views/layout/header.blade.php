@@ -8,28 +8,29 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Trang chủ</a>
+                    <a class="nav-link {{ request()->routeIs('home') ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Trang chủ</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('dashboard')}}">Thống kê</a>
+                    <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Thống kê</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('user')}}">Nhân viên</a>
+                    <a class="nav-link {{ request()->routeIs('user') ? 'active' : '' }}" href="{{ route('user') }}">Nhân viên</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('stock')}}">Nhập kho</a>
+                    <a class="nav-link {{ request()->routeIs('stock') ? 'active' : '' }}" href="{{ route('stock') }}">Nhập kho</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('order')}}">Đơn hàng</a>
+                    <a class="nav-link {{ request()->routeIs('order') ? 'active' : '' }}" href="{{ route('order') }}">Đơn hàng</a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('logout')}}">Đăng xuất</a>
                 </li>
             </ul>
             <div>
                 @auth
-                    <img src="{{ asset('images/btt.jpg') }}" width="40px" class="rounded-5" alt="">
-                    <span>{{ Auth::user()->name }}</span>
+                <img src="{{ asset('images/btt.jpg') }}" width="40px" class="rounded-5" alt="">
+                <span>{{ Auth::user()->name }}</span>
                 @endauth
             </div>
         </div>
