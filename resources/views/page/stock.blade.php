@@ -6,10 +6,14 @@ Nhập kho
 <div class="container" style="min-height: 90vh;">
     <div class="row py-3">
         <div class="col-md-12">
-            <h2>
-                Nhập kho
-            </h2>
+            <div class="d-flex justify-content-between">
+                <h2>
+                    Nhập kho
+                </h2>
+                <button class="btn btn-primary">Thêm</button>
+            </div>
             @if (!$stocks)
+
             <div class="alert alert-primary" role="alert">
                 Chưa nhập hàng
             </div>
