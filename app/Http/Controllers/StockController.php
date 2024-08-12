@@ -23,6 +23,13 @@ class StockController extends Controller
         $stock = StockEntry::findOrFail($id);
         return view('page.stockDetail', compact('stock','stockDetail'));
     }
+    
+    public function orderNhapKho()
+    {
+      
+        return view('page.orderNhapHang');
+    }
+
     /**
      * Show the form for creating a new resource.
      */

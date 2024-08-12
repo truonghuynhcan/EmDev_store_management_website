@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Giỏ hàng | EmDev</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <!-- dẫn đến menu -->
+            <a class="navbar-brand fw-bold" href="#">Em<span class="text-primary">Dev</span></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Thống kê
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Đơn hàng trong ngày</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="#">Tất cả</a></li>
+                            <li><a class="dropdown-item" href="#">Nhân viên</a></li>
+                            <li><a class="dropdown-item" href="#">Nhập kho</a></li>
+                            <li><a class="dropdown-item" href="#">Sản phẩm</a></li>
+                            <li><a class="dropdown-item" href="#">Đơn hàng</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h2 class=" mt-3 text-center">HÓA ĐƠN NHẬP HÀNG</h2>
+        <form action="" method="">
+            <div class="mt-3">
+                <span>Tên hóa đơn</span>: <input type="text" name="name" id="name" value="Nhập hàng lần 1">
+            </div>
+            <div class="mt-3">
+                <span>Ghi chú</span>: <input type="text" name="name" id="name" placeholder="Ghi chú">
+            </div>
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th scope="col">STT</th>
+                        <th scope="col">Nguyên Liệu</th>
+                        <th scope="col">Tên hàng</th>
+                        <th scope="col">ID</th>
+                        <th scope="col">Đơn giá</th>
+                        <th scope="col">Số lượng</th>
+                        <th scope="col">Đơn vị</th>
+                        <th scope="col">Thành tiền</th>
+                    </tr>
+                </thead>
+                <tbody id="table_nhap_hang">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td><input type="text" name="nguyenlieu" id="" placeholder="Nguyên liệu"></td>
+                        <td><input type="text" name="tensanpham" id="" placeholder="Tên hàng"></td>
+                        <td>
+                            <select class="" aria-label="Default select example">
+                                <option selected>none</option>
+                                <option value="1">bánh tráng</option>
+                                <option value="2">trà tắt</option>
+                                <option value="3">bò né</option>
+                            </select>
+                        </td>
+                        <td><input type="number" min="0" name="dongia" oninput="thanhtiensp(this)" placeholder="Đơn giá"></td>
+                        <td><input type="number" min="0" name="soluong" oninput="thanhtiensp(this)" placeholder="Số Lượng"></td>
+                        <td><input type="text" name="donvi" id="" placeholder="Đơn vị"></td>
+                        <td><input type="text" disabled value="0đ" name="thanhtien"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="8"><button type="button" class="btn btn-outline-primary container-fluid" onclick="themHang()">+ Thêm hàng</button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="mt-3">
+                <span>Tổng tiền</span>
+                <input type="text" name="tongtien" id="tongtien" value="0 ₫" disabled>
+            </div>
+        </form>
+        <script>
+            function thanhtiensp(element) {
+                // Lấy hàng cha chứa các ô input
+                const row = element.closest('tr');
+
+                // Lấy giá trị của đơn giá và số lượng
+                const dongia = row.querySelector('input[name="dongia"]').value;
+                const soluong = row.querySelector('input[name="soluong"]').value;
+
+                if (dongia != null && soluong != null) {
+                    // Tính thành tiền
+                    const thanhtien = dongia * soluong;
+
+                    // Cập nhật giá trị cho ô thành tiền
+                    row.querySelector('input[name="thanhtien"]').value = thanhtien + 'đ';
+                }
+
+                tinhTongTien();
+            }
+
+            function themHang() {
+                // Lấy tbody để thêm hàng mới
+                const tbody = document.getElementById('table_nhap_hang');
+
+                // Đếm số lượng hàng hiện tại trong tbody (trừ đi hàng chứa nút "Thêm hàng")
+                const rowCount = tbody.querySelectorAll('tr').length - 1;
+
+                // Tạo phần tử tr mới
+                const newRow = document.createElement('tr');
+
+                // Tạo nội dung cho hàng mới
+                newRow.innerHTML = `
+                <th scope="row">${rowCount + 1}</th>
+                <td><input type="text" name="nguyenlieu" placeholder="Nguyên liệu"></td>
+                <td><input type="text" name="tensanpham" placeholder="Tên hàng"></td>
+                <td>
+                    <select class="" aria-label="Default select example">
+                        <option selected>none</option>
+                        <option value="1">bánh tráng</option>
+                        <option value="2">trà tắt</option>
+                        <option value="3">bò né</option>
+                    </select>
+                </td>
+                <td><input type="number" min="0" name="dongia" oninput="thanhtiensp(this)" placeholder="Đơn giá"></td>
+                <td><input type="number" min="0" name="soluong" oninput="thanhtiensp(this)" placeholder="Số Lượng"></td>
+                <td><input type="text" name="donvi" placeholder="Đơn vị"></td>
+                <td><input type="text" disabled value="0đ" name="thanhtien"></td>
+            `;
+
+                // Thêm hàng mới vào trước hàng chứa nút "Thêm hàng"
+                tbody.insertBefore(newRow, tbody.lastElementChild);
+            }
+
+            function tinhTongTien() {
+                const tbody = document.getElementById('table_nhap_hang');
+                var tongTien = 0;
+
+                tbody.querySelectorAll('tr').forEach(row => {
+                    const thanhtien = row.querySelector('input[name="thanhtien"]').value;
+                    if (thanhtien) {
+                        const value = parseFloat(thanhtien.replace(/[^\d]/g, '')); // Loại bỏ các ký tự không phải số
+                        tongTien += value;
+                    }
+                    document.getElementById('tongtien').value = tongTien.toLocaleString('vi-VN')  + ' ₫';
+                });
+            }
+        </script>
+
+    </div>
+
+
+
+    <!-- JS -->
+    <script src="../js/bootstrap.min.js"></script>
+</body>
+
+</html>

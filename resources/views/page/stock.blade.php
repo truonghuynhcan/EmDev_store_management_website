@@ -10,7 +10,7 @@ Nhập kho
                 <h2>
                     Nhập kho
                 </h2>
-                <button class="btn btn-primary">Thêm</button>
+                <a href="{{route('orderNhapKho')}}" class="btn btn-primary">Thêm</a>
             </div>
             @if (!$stocks)
 
