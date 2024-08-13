@@ -27,6 +27,7 @@ Route::get('/thong-ke', [AnalyticsController ::class, 'dashboard'] )->name('dash
 Route::get('/don-hang', [OrderController ::class, 'index'] )->name('order');
 Route::get('/nhap-kho', [StockController ::class, 'index'] )->name('stock');
 Route::get('/hoa-don-nhap-kho', [StockController ::class, 'orderNhapKho'] )->name('orderNhapKho');
+Route::post('/tao-hoa-don-nhap-kho', [StockController ::class, 'taoOrderNhapHang'] )->name('taoOrderNhapHang');
 Route::get('/don-hang-chi-tiet/{id}', [OrderController ::class, 'detail'] )->name('orderDetail');
 Route::get('/nhap-kho-chi-tiet/{id}', [StockController ::class, 'detail'] )->name('stockDetail');
 
