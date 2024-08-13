@@ -41,10 +41,10 @@
                         <td><input type="text" name="nguyenlieu[]" id="" placeholder="Nguyên liệu" style="width:120px"></td>
                         <td><input type="text" name="tensanpham[]" id="" placeholder="Tên hàng" style="width:120px"></td>
                         <td>
-                            <select name="id_sp[]" class="form-select" aria-label="Default select example" style="width:120px">
+                            <select name="id_sp[]" onchange="capNhatTenSanPham(this)" class="form-select" aria-label="Default select example" style="width:120px">
                                 <option value="" selected>none</option>
                                 @foreach ($products as $item)
-                                    <option value="{{ $item->id }}&&{{ $item->name }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" data-name="{{ $item->name }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </td>
@@ -112,10 +112,10 @@
                 <td><input type="text" name="nguyenlieu[]" id="" placeholder="Nguyên liệu" style="width:120px"></td>
                 <td><input type="text" name="tensanpham[]" id="" placeholder="Tên hàng" style="width:120px"></td>
                 <td>
-                    <select name="id_sp[]" class="form-select" aria-label="Default select example" style="width:120px">
+                    <select name="id_sp[]" onchange="capNhatTenSanPham(this)" class="form-select" aria-label="Default select example" style="width:120px">
                         <option value="" selected>none</option>
                         @foreach ($products as $item)
-                            <option value="{{ $item->id }}&&{{ $item->name }}">{{ $item->name }}</option>
+                            <option value="{{ $item->id }}" data-name="{{ $item->name }}">{{ $item->name }}</option>
                         @endforeach
                     </select>
                 </td>
@@ -142,6 +142,21 @@
                     document.querySelector('input[name="tongtien"]').value = tongTien;
                     document.querySelector('#tongtien').innerHTML = tongTien.toLocaleString('vi-VN') + ' đ';
                 });
+            }
+
+            function capNhatTenSanPham(selectElement) {
+                // Lấy giá trị name từ option được chọn
+                const selectedOption = selectElement.options[selectElement.selectedIndex];
+                const tenSanPham = selectedOption.getAttribute('data-name');
+
+                // Tìm ô input tương ứng để cập nhật tên sản phẩm
+                const row = selectElement.closest('tr');
+                const inputTenSanPham = row.querySelector('input[name="tensanpham[]"]');
+
+                // Cập nhật giá trị vào ô input
+                if (inputTenSanPham) {
+                    inputTenSanPham.value = tenSanPham;
+                }
             }
         </script>
 

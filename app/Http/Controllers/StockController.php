@@ -35,13 +35,14 @@ class StockController extends Controller
     }
     public function taoOrderNhapHang(Request $request)
     {
+        // bắt lỗi 
         $request->validate([
             'name' => 'required|string|max:255',
             'note' => 'nullable|string',
             'id_user' => 'exists:users,id',
             'tongtien' => 'required|numeric|min:0',
-        
-            'nguyenlieu.*' => 'required|string',
+
+            'nguyenlieu.*' => 'nullable|string',
             'tensanpham.*' => 'required|string',
             'soluong.*' => 'required|numeric|min:1',
             'donvi.*' => 'required|string',
@@ -50,29 +51,29 @@ class StockController extends Controller
             'name.required' => 'Vui lòng điền Tên Hóa Đơn',
             'name.string' => 'Tên Hóa Đơn phải là chuỗi ký tự.',
             'name.max' => 'Tên Hóa Đơn không được vượt quá 255 ký tự.',
-            
+
             'id_user.required' => 'Vui lòng điền Người Nhập Hàng',
             'id_user.exists' => 'Người dùng được chọn không tồn tại trong hệ thống.',
 
             'tongtien.required' => 'Vui lòng điền Thêm Sản Phẩm',
-        
+
             'nguyenlieu.*.required' => 'Vui lòng điền Nguyên liệu',
             'nguyenlieu.*.string' => 'Nguyên liệu phải là chuỗi ký tự.',
-        
+
             'tensanpham.*.required' => 'Tên Vui lòng điền Tên Sản Phẩm',
             'tensanpham.*.string' => 'Tên sản phẩm phải là chuỗi ký tự.',
-        
+
             'soluong.*.required' => 'Vui lòng điền Số Lượng',
             'soluong.*.numeric' => 'Số lượng phải là một số.',
             'soluong.*.min' => 'Số lượng phải lớn hơn hoặc bằng 1.',
-        
+
             'donvi.*.required' => 'Vui lòng điền Đơn Vị',
             'donvi.*.string' => 'Đơn vị phải là chuỗi ký tự.',
-        
+
             'dongia.*.required' => 'Vui lòng điền Đơn Giá',
             'dongia.*.numeric' => 'Đơn giá phải là một số.',
             'dongia.*.min' => 'Đơn giá không được nhỏ hơn 0.',
-        
+
         ]);
 
         $s = new StockEntry();
@@ -100,8 +101,14 @@ class StockController extends Controller
             $item->unit = $donvi[$index];
             $item->price = $dongia[$index];
             $item->save();
-        }
 
+            // tăng số lượng sp trong bảng products
+            if ($request->id_sp[$index] != "") {
+                $p = Product::find($request->id_sp[$index]);
+                $p->instock += $item->quantity;
+                $p->save();
+            }
+        }
         return redirect()->route('stock');
     }
 
