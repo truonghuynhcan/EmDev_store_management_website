@@ -29,7 +29,7 @@
                 <tbody class="table-group-divider">
                     @foreach ($orders as $item)
                     <tr>
-                        <th scope="row">{{ $item->id }}</th>
+                        <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->user->name}}</td>
                         <td>{{$item->gender == 0 ? 'Nam' : 'Nữ'}}</td>
                         <td>{{ number_format($item->total_money,0,',','.')}} ₫</td>

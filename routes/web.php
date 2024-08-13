@@ -15,6 +15,10 @@ Route::get('/dang-ky', [UserController::class, 'register'])->name('register');
 Route::post('/dang-ky-loading', [UserController::class, 'register_'])->name('register_');
 Route::get('/dang-xuat', [UserController::class, 'logout'])->name('logout');
 Route::get('/nhan-vien', [UserController::class, 'index'])->name('user');
+Route::post('/them-nhan-vien', [UserController::class, 'add'])->name('adduser');
+Route::get('/sua-nhan-vien/{id}', [UserController::class, 'edit'])->name('edituser');
+Route::put('/sua-nhan-vien/{id}', [UserController::class, 'update'])->name('updateuser');
+Route::delete('/xoa-nhan-vien/{id}', [UserController::class, 'delete'])->name('deleteuser');
 
 Route::get('/tao-don-hang', [OrderController::class, 'create_order'])->name('create_order');
 Route::post('/tao-don-hang', [OrderController::class, 'checkout_'])->name('checkout_');

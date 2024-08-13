@@ -29,7 +29,7 @@ Nhập kho chi tiết
                         <tbody class="table-group-divider">
                             @foreach ($stockDetail as $item)
                             <tr>
-                                <th scope="row">{{ $item->id }}</th>
+                                <th scope="row">{{ $loop->iteration }}</th>
                                 <td>{{ $item->material_product}}</td>
                                 <td>{{ $item->name_product}}</td>
                                 <td>{{ $item->quantity}}</td>

@@ -32,7 +32,7 @@ Nhập kho
                 <tbody class="table-group-divider">
                     @foreach ($stocks as $item)
                     <tr>
-                        <th scope="row">{{ $item->id }}</th>
+                        <th scope="row">{{ $loop->iteration }}</th>
                         <td>{{ $item->user->name}}</td>
                         <td>{{ $item->name}}</td>
                         <td>{{ number_format($item->price,0,',','.')}} ₫</td>
