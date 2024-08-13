@@ -95,7 +95,7 @@ class StockController extends Controller
         foreach ($tensanpham as $index => $tenSanPham) {
             $item = new StockItem();
             $item->id_stock_entry = $s->id;
-            $item->material_product = $nguyenlieu[$index];
+            $item->material_product = $nguyenlieu[$index]??null;
             $item->name_product = $tenSanPham;
             $item->quantity = $soluong[$index];
             $item->unit = $donvi[$index];
