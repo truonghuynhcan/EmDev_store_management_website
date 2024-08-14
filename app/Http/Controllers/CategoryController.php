@@ -13,7 +13,7 @@ class CategoryController extends Controller
     public function index()
     {
         $cate = Category::get();
-        return view('page.Category', compact('cate'));
+        return view('page.category', compact('cate'));
     }
 
     public function add(Request $request)
