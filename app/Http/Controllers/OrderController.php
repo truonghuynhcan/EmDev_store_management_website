@@ -14,7 +14,7 @@ class OrderController extends Controller
     public function index()
     {
         // Tìm đơn hàng
-        $orders = Order::select('id','id_admin','gender','total_money','quantity','payment')->get();
+        $orders = Order::select('id','id_admin','gender','total_money','quantity','payment','created_at')->get();
         // dd($orders);
         return view('page.order', compact('orders'));
     }
