@@ -37,6 +37,10 @@ Route::get('/don-hang-chi-tiet/{id}', [OrderController ::class, 'detail'] )->nam
 Route::get('/nhap-kho-chi-tiet/{id}', [StockController ::class, 'detail'] )->name('stockDetail');
 
 Route::get('/san-pham', [ProductController ::class, 'index'] )->name('product');
+Route::post('/them-san-pham', [ProductController ::class, 'add'] )->name('addpro');
+Route::get('/sua-san-pham/{id}', [ProductController ::class, 'edit'] )->name('editpro');
+Route::put('/sua-san-pham/{id}', [ProductController ::class, 'update'] )->name('updatepro');
+Route::delete('/xoa-san-pham/{id}', [ProductController ::class, 'delete'] )->name('deletepro');
 
 
 Route::get('/danh-muc', [CategoryController ::class, 'index'] )->name('category');
