@@ -42,8 +42,10 @@
                 <h3 class="text-primary text-center my-auto">{{$order->gift}}</h3>
             </div>
             @endif
-            <h2 class="pb-3">Tổng giỏ hàng</h2>
-            <h5>Phương thức thanh toán: Tiền mặt</h5>
+            <h2 class="pb-3">Thông tin giỏ hàng</h2>
+            <h5>Tên khách hàng: {{$order->name_user==null?'Ẩn Danh':$order->name_user}}</h5>
+            <p class="mb-0">Giới tính: {{$order->gender==0?'Nam':'Nữ'}}</p>
+            <p>Phương thức thanh toán: Tiền mặt</p>
             <h3>Tổng tiền: <span class="text-primary">{{number_format($order->total_money, 0, ',', '.')}} ₫</h3>
         </div>
     </div>

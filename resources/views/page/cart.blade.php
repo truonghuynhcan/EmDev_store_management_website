@@ -154,7 +154,17 @@
                         </div>
                         <div class="d-flex justify-content-between">
                             <input type="text" name="name_user" placeholder="Tên khách hàng" class="form-control">
-                            <div class="text-primary h4" id="total_amount"></div>
+                        </div>
+                        <div class=" mt-3">
+                            <p class="h5">Giới tính</p>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gioitinh" id="inlineRadio1" value="0" checked>
+                                <label class="form-check-label" for="inlineRadio1">Nam</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gioitinh" id="inlineRadio2" value="1">
+                                <label class="form-check-label" for="inlineRadio2">Nữ</label>
+                            </div>
                         </div>
                         <hr class="border-4">
                         <input type="submit" class="mt-3 btn btn-primary" value="Thanh toán tiền mặt">

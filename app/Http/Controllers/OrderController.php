@@ -62,6 +62,7 @@ class OrderController extends Controller
         $order = Order::find($request->input('id_order'));
         $order->total_money = $request->input('total_amount');
         $order->quantity = $request->input('total_quantity');
+        $order->gender = $request->input('gioitinh');
         if ($request->input('name_user')) {
             $order->name_user = $request->input('name_user');
         }
