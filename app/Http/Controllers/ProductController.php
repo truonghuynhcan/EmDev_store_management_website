@@ -138,6 +138,10 @@ class ProductController extends Controller
         // Tìm sản phẩm theo ID
         $product = Product::findOrFail($id);
 
+        if ($product->orderDetails()->count() > 0) {
+            return redirect()->back()->with('error', 'Sản phẩm không thể xóa vì đang được liên kết với các đơn hàng');
+        }
+
         // Xóa ảnh liên quan (nếu có)
         if ($product->image && file_exists(public_path('images/' . $product->image))) {
             unlink(public_path('images/' . $product->image));

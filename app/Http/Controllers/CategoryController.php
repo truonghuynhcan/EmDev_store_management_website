@@ -21,7 +21,7 @@ class CategoryController extends Controller
         $validator = Validator::make($request->all(), [
             'names.*' => [
                 'required',
-                function($attribute, $value, $fail) use ($request) {
+                function ($attribute, $value, $fail) use ($request) {
                     $names = $request->input('names');
                     if (count(array_filter($names)) !== count(array_unique(array_filter($names)))) {
                         return $fail('Các danh mục không được trùng nhau.');
@@ -31,11 +31,11 @@ class CategoryController extends Controller
         ], [
             'names.*.required' => 'Vui lòng nhập tên danh mục',
         ]);
-    
+
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator)->withInput();
         }
-    
+
         // Lưu các danh mục vào cơ sở dữ liệu
         foreach ($request->input('names') as $name) {
             if (!empty($name)) {
@@ -44,7 +44,7 @@ class CategoryController extends Controller
                 $category->save();
             }
         }
-    
+
         return redirect()->back()->with('success', 'Đã thêm danh mục thành công');
     }
 
@@ -54,15 +54,15 @@ class CategoryController extends Controller
         return view('page.editcate', compact('cate'));
     }
 
-    function update(Request $request,$id)
+    function update(Request $request, $id)
     {
-        
+
         $cate = Category::findorfail($id);
         $request->validate([
             'name' => [
-            'required',
-            Rule::unique('categories')->ignore($cate->id),
-        ],
+                'required',
+                Rule::unique('categories')->ignore($cate->id),
+            ],
         ], [
             'name.required' => 'Vui lòng nhập tên',
             'name.unique' => 'Tên danh mục bị trùng',
@@ -75,6 +75,10 @@ class CategoryController extends Controller
     public function delete($id)
     {
         $cate = Category::findorfail($id);
+        // Kiểm tra xem danh mục có liên quan đến bất kỳ sản phẩm nào không
+        if ($cate->products()->count() > 0) {
+            return redirect()->back()->with('error', 'Danh mục không thể xóa vì có sản phẩm liên quan');
+        }
         $cate->delete();
         return redirect()->route('category')->with('success', 'Xoá danh mục thành công');
     }
