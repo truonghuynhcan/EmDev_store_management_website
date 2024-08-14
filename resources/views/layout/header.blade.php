@@ -14,6 +14,12 @@
                     <a class="nav-link {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">Thống kê</a>
                 </li>
                 <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('category') ? 'active' : '' }}" href="{{ route('category') }}">Danh mục</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link {{ request()->routeIs('product') ? 'active' : '' }}" href="{{ route('product') }}">Sản phẩm</a>
+                </li>
+                <li class="nav-item">
                     <a class="nav-link {{ request()->routeIs('user') ? 'active' : '' }}" href="{{ route('user') }}">Nhân viên</a>
                 </li>
                 <li class="nav-item">

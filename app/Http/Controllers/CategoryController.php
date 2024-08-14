@@ -2,21 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Validator;
 
-class ProductController extends Controller
+class CategoryController extends Controller
 {
 
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $products = Product::get();
-        return view('page.product', compact('products'));
+        $cate = Category::get();
+        return view('page.Category', compact('cate'));
     }
 
     public function add(Request $request)
@@ -42,9 +39,9 @@ class ProductController extends Controller
         // Lưu các danh mục vào cơ sở dữ liệu
         foreach ($request->input('names') as $name) {
             if (!empty($name)) {
-                $Product = new Product();
-                $Product->name = $name;
-                $Product->save();
+                $category = new Category();
+                $category->name = $name;
+                $category->save();
             }
         }
     
@@ -53,14 +50,14 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $cate = Product::findorfail($id);
+        $cate = Category::findorfail($id);
         return view('page.editcate', compact('cate'));
     }
 
     function update(Request $request,$id)
     {
         
-        $cate = Product::findorfail($id);
+        $cate = Category::findorfail($id);
         $request->validate([
             'name' => [
             'required',
@@ -72,13 +69,13 @@ class ProductController extends Controller
         ]);
         $cate->name = $request->name;
         $cate->save();
-        return redirect()->route('Product')->with('success', 'Sửa danh mục thành công');
+        return redirect()->route('category')->with('success', 'Sửa danh mục thành công');
     }
 
     public function delete($id)
     {
-        $cate = Product::findorfail($id);
+        $cate = Category::findorfail($id);
         $cate->delete();
-        return redirect()->route('Product')->with('success', 'Xoá danh mục thành công');
+        return redirect()->route('category')->with('success', 'Xoá danh mục thành công');
     }
 }

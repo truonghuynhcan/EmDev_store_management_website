@@ -1,7 +1,8 @@
 <?php
 
 use App\Http\Controllers\AnalyticsController;
-use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\UserController;
@@ -35,6 +36,14 @@ Route::post('/tao-hoa-don-nhap-kho', [StockController ::class, 'taoOrderNhapHang
 Route::get('/don-hang-chi-tiet/{id}', [OrderController ::class, 'detail'] )->name('orderDetail');
 Route::get('/nhap-kho-chi-tiet/{id}', [StockController ::class, 'detail'] )->name('stockDetail');
 
+Route::get('/san-pham', [ProductController ::class, 'index'] )->name('product');
+
+
+Route::get('/danh-muc', [CategoryController ::class, 'index'] )->name('category');
+Route::post('/them-danh-muc', [CategoryController ::class, 'add'] )->name('addcate');
+Route::get('/sua-danh-muc/{id}', [CategoryController ::class, 'edit'] )->name('editcate');
+Route::put('/sua-danh-muc/{id}', [CategoryController ::class, 'update'] )->name('updatecate');
+Route::delete('/xoa-danh-muc/{id}', [CategoryController ::class, 'delete'] )->name('deletecate');
 
 Route::prefix('api')->group(function(){
     // Route::get('/products',[ProductController::class, 'products']
