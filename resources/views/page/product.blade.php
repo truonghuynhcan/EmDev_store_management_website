@@ -126,6 +126,7 @@ Sản Phẩm
                         <th scope="col">Ảnh</th>
                         <th scope="col">Tên sản phẩm</th>
                         <th scope="col">Danh mục</th>
+                        <th scope="col">Đã bán</th>
                         <th scope="col">Giá</th>
                         <th scope="col">Thao tác</th>
                     </tr>
@@ -137,6 +138,7 @@ Sản Phẩm
                         <td><img src="{{ asset('images/'.$pro->image) }}" alt="" width="120px"></td>
                         <td>{{ $pro->name}}</td>
                         <td>{{ $pro->category->name}}</td>
+                        <td class="text-center">{{ $pro->sold}}</td>
                         <td>
                             @if ($pro->sale_price)
                             <span class="h3 text-primary">{{ number_format($pro->sale_price, 0, ',', '.') }} ₫</span>
